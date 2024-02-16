@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./shopstyle.css">
+    <script>
+        function plusAction(i) {
+            var count = parseInt(document.getElementById(i).value);
+            document.getElementById(i).value = ++count;
+        };
+
+        function minusAction(i) {
+            var count = parseInt(document.getElementById(i).value);
+            if (count > 0) {
+                (document.getElementById(i).value) = --count;
+            }
+        };   
+        
+        function initClose() {
+            const dropdown = document.querySelector(".dropdown");
+            window.addEventListener("click", () => {
+                dropdown.style.display = "none";
+            });
+        }
+
+        function calcTotal() {
+            let ids = ["c0000", "c0001", "c0098", "c0099", "c0100", "c0200","c0201",
+                      "c0300", "c0301", "c0302", "c0303", "c0304",
+                      "c0305", "c0306", "c0307", "c0400", "c0401",
+                      "c0402", "c0403", "c0600", "c0601", "c0602",
+                      "c0603", "c0604", "c0605", "c0700", "c0701",
+                      "c0702", "c0800", "c0801", "c0802", "c0803",
+                      "c0900", "c0901", "c0902", "c0903", "c0904"];
+        
+            let total = 0;
+            let line = "";
+
+            for (i of ids) {
+                if (document.getElementById(i).value > 0 
+                     && i !== "c0098" && i !== "c0099" 
+                     && i !== "c0000" && i !== "c0001") {
+                    total += document.getElementById(i).value * 
+                             document.getElementById(i).parentElement.parentElement
+                             .querySelector(".eachitem .price").innerHTML;
+
+                    line += "\n" + document.getElementById(i).parentElement
+                    .parentElement.querySelector(".eachitem .itemname").innerHTML 
+                    + "  [" + document.getElementById(i).value + "] 份   -->  " 
+                    + "CA $ " + document.getElementById(i).value * 
+                    document.getElementById(i).parentElement.parentElement
+                    .querySelector(".eachitem .price").innerHTML;
+                } 
+
+                if ((document.getElementById(i).value > 0 && i === "c0000") || 
+                   (document.getElementById(i).value > 0 && i === "c0001")) {
+                    total += document.getElementById(i).value * 
+                             document.getElementById(i).parentElement.parentElement
+                             .querySelector(".eachitem .price").innerHTML;
+
+                    let chosen = "";
+                    var objs = document.getElementById(i).parentElement.parentElement.
+                               querySelector(".eachitem .checkall")
+                               .getElementsByTagName("label");
+                    for (var j=0; j<objs.length; j++) {
+                        if (objs[j].children[0].checked === true) {
+                            chosen += objs[j].children[0].value;
+                        }
+                    }
+                    line += "\n" + document.getElementById(i).parentElement
+                    .parentElement.querySelector(".eachitem .itemname").innerHTML 
+                    + "  [" + document.getElementById(i).value + "] 份 (" +
+                    chosen + ")  -->  "  + "CA $ " + document.getElementById(i).value * 
+                    document.getElementById(i).parentElement.parentElement
+                    .querySelector(".eachitem .price").innerHTML;
+                }
+            
+
+                if (document.getElementById(i).value > 0 && 
+                   (i === "c0098" ) || (i === "c0099")) {
+                    total += document.getElementById(i).value * 2;
+                    line += "\n(除此再加面筋 [" + document.getElementById(i).value + 
+                         "]份, $" + 2*document.getElementById(i).value + ")";
+                }
+                
+            }
+
+            line += "\n\n 备注：" + document.querySelector(".confirm input").value;
+            line += "\n\n\n 合计：" + total;
+
+            window.location.href = "orderlist.html?string=" + encodeURIComponent(line);
+            alert(line);
+        };
+
+        const body = document.body;
+        const dropdown = document.getElementsByClassName("dropdown")[0];
+        
+        function bindEvent(elem, type, fn) {
+            elem.addEventListener(type, fn);
+        }
+
+        bindEvent(body, 'click', function() {
+            dropdown.style.display = 'none';
+        })
+
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="bigfreshlogo">
+            <img src="../logo.png">
+        </div>
+        <div class="nav">
+            <ul class="nav-ul">
+                <li><a href="../homepage.html" class="home">&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;首页</a></li>
+                <li><a href="#" class="order">&nbsp;&nbsp;&nbsp;
+                    &nbsp;点餐</a>
+                    <div class="dropdown">
+                        <ul class="ordertypes">
+                            
+                            <li><a href="#">凉皮套餐</a></li>
+                            <li><a href="#type1">肉夹馍</a></li>
+                            <li><a href="#type2">凉皮系列</a></li>
+                            <li><a href="#type3">凉菜系列</a></li>
+                            <li><a href="#type4">辣而美海鲜</a></li>
+                            <li><a href="#">时蔬系列</a></li>
+                            <li><a href="#type6">炸物系列</a></li>
+                            <li><a href="#type7">纯手工馒头</a></li>
+                            <li><a href="#type8">热炒</a></li>
+                            <li><a href="#type9">盒饭套餐</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="./orderlist.html">查看订单</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="items-first">
+        <div class="eachitem">
+            <img href="#" src="./pic/1000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">麻酱凉皮与肉夹馍套餐</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0000')">-</button>
+                <input type="text" id="c0000" value="0">
+                <button class="plus-btn" onclick="plusAction('c0000')">+</button>
+                
+            </div>
+            <div class="choices1">
+                <div class="checkall">
+                    <label class="check1">
+                        <input type="radio" name="chk" id="noxiangcai" checked="checked" value="不含香菜">不含香菜
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="chk" id="noqingjiao" value="不含青椒">不含青椒
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="chk" id="noboth" value="不含香菜青椒">不含香菜青椒
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="chk" id="haveboth" value="全含">全含
+                    </label>
+                    
+                </div>
+            </div>
+
+            <p class="itemname">额外面筋</p>
+            <p class="symbol">$</p><p class="price">2.00</p>
+            <div class="counter-small">
+                <button class="minus-btn" onclick="minusAction('c0098')">-</button>
+                <input type="text" id="c0098" value="0">
+                <button class="plus-btn" onclick="plusAction('c0098')">+</button>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/1000.jpg">  
+        </div>
+        <div class="eachitem">
+            <p class="itemname">凉皮与肉夹馍套餐</p>
+            <p class="symbol">$</p><p class="price">15.00</p>
+
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0001')">-</button>
+                <input type="text" id="c0001" value="0">
+                <button class="plus-btn" onclick="plusAction('c0001')">+</button>
+                
+            </div>
+
+            <div class="choices2">
+                <div class="checkall">
+                    <label class="check1">
+                        <input type="radio" name="chk1" id="noxiangcai" value="不含香菜">不含香菜
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="chk1" id="noqingjiao" value="不含青椒">不含青椒
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="chk1" id="noboth" value="不含香菜青椒">不含香菜青椒
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="chk1" id="haveboth" value="全含">全含
+                    </label>
+                </div>
+            </div>
+            <p>额外面筋</p><p class="symbol">$</p><p class="price">2.00</p>
+            <div class="counter-small">
+                <button class="minus-btn" onclick="minusAction('c0099')">-</button>
+                <input type="text" id="c0099" value="0">
+                <button class="plus-btn" onclick="plusAction('c0099')">+</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="items-first"  id="type1">
+        <div class="eachitem">
+            <img href="#" src="./pic/20000.png">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">肉夹馍</p>
+            <p class="symbol">$</p><p class="price">6.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0100')">-</button>
+                <input type="text" id="c0100" value="0">
+                <button class="plus-btn" onclick="plusAction('c0100')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>含香菜和青椒</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type2">
+        <div class="eachitem">
+            <img href="#" src="./pic/30000.png">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">麻酱凉皮</p>
+            <p class="symbol">$</p><p class="price">11.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0200')">-</button>
+                <input type="text" id="c0200" value="0">
+                <button class="plus-btn" onclick="plusAction('c0200')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4> 包含面筋。辣子，醋水，蒜水<br>
+                    还有辣油，额外小盒分装。</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/30001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">酸辣凉皮</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0201')">-</button>
+                <input type="text" id="c0201" value="0">
+                <button class="plus-btn" onclick="plusAction('c0201')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type3">
+        <div class="eachitem">
+            <img href="#" src="./pic/3000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">德州脱骨扒鸡</p>
+            <p class="symbol">$</p><p class="price">30.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0300')">-</button>
+                <input type="text" id="c0300" value="0">
+                <button class="plus-btn" onclick="plusAction('c0300')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4> (2.5磅左右龙岗鸡)</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">凉拌土豆丝</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0301')">-</button>
+                <input type="text" id="c0301" value="0">
+                <button class="plus-btn" onclick="plusAction('c0301')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3002.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">老鸡汁卤豆腐</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0302')">-</button>
+                <input type="text" id="c0302" value="0">
+                <button class="plus-btn" onclick="plusAction('c0302')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3003.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">蟹肉棒黄瓜</p>
+            <p class="symbol">$</p><p class="price">12.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0303')">-</button>
+                <input type="text" id="c0303" value="0">
+                <button class="plus-btn" onclick="plusAction('c0303')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3004.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">老醋花生</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0304')">-</button>
+                <input type="text" id="c0304" value="0">
+                <button class="plus-btn" onclick="plusAction('c0304')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3005.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">流亭猪蹄</p>
+            <p class="symbol">$</p><p class="price">13.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0305')">-</button>
+                <input type="text" id="c0305" value="0">
+                <button class="plus-btn" onclick="plusAction('c0305')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3006.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">秦式酸辣猪手</p>
+            <p class="symbol">$</p><p class="price">15.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0306')">-</button>
+                <input type="text" id="c0306" value="0">
+                <button class="plus-btn" onclick="plusAction('c0306')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/3007.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">麻辣口水鸡</p>
+            <p class="symbol">$</p><p class="price">15.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0307')">-</button>
+                <input type="text" id="c0307" value="0">
+                <button class="plus-btn" onclick="plusAction('c0307')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type4">
+        <div class="eachitem">
+            <img href="#" src="./pic/4000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">辣而美海带结</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0400')">-</button>
+                <input type="text" id="c0400" value="0">
+                <button class="plus-btn" onclick="plusAction('c0400')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/4001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">辣而美鲍鱼 (8只)</p>
+            <p class="symbol">$</p><p class="price">30.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0401')">-</button>
+                <input type="text" id="c0401" value="0">
+                <button class="plus-btn" onclick="plusAction('c0401')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/4002.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">辣而美虾 (8只)</p>
+            <p class="symbol">$</p><p class="price">18.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0402')">-</button>
+                <input type="text" id="c0402" value="0">
+                <button class="plus-btn" onclick="plusAction('c0402')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/4003.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">辣而美扇贝</p>
+            <p class="symbol">$</p><p class="price">25.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0403')">-</button>
+                <input type="text" id="c0403" value="0">
+                <button class="plus-btn" onclick="plusAction('c0403')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type6">
+        <div class="eachitem">
+            <img href="#" src="./pic/6000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">老北京鸡肉卷</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0600')">-</button>
+                <input type="text" id="c0600" value="0">
+                <button class="plus-btn" onclick="plusAction('c0600')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/6001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">炸鸡汉堡</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0601')">-</button>
+                <input type="text" id="c0601" value="0">
+                <button class="plus-btn" onclick="plusAction('c0601')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/6002.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">劲脆炸鸡腿 (4个)</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0602')">-</button>
+                <input type="text" id="c0602" value="0">
+                <button class="plus-btn" onclick="plusAction('c0602')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/6003.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">墨鱼汁炸鸡腿 (4个)</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0603')">-</button>
+                <input type="text" id="c0603" value="0">
+                <button class="plus-btn" onclick="plusAction('c0603')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/6004.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">校园火腿肠 (1根)</p>
+            <p class="symbol">$</p><p class="price">3.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0604')">-</button>
+                <input type="text" id="c0604" value="0">
+                <button class="plus-btn" onclick="plusAction('c0604')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/6005.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">油炸鱿鱼</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0605')">-</button>
+                <input type="text" id="c0605" value="0">
+                <button class="plus-btn" onclick="plusAction('c0605')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type7">
+        <div class="eachitem">
+            <img href="#" src="./pic/7000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">红枣馒头 (8个)</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0700')">-</button>
+                <input type="text" id="c0700" value="0">
+                <button class="plus-btn" onclick="plusAction('c0700')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>馒头可混搭，例如：<br>5个白馒头&4个红馒头，<br>
+                    4个红馒头&4个黑芝麻馒头。<br>请在最下方备注处说明。</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/7001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">黑芝麻馒头 (8个)</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0701')">-</button>
+                <input type="text" id="c0701" value="0">
+                <button class="plus-btn" onclick="plusAction('c0701')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>馒头可混搭，例如：<br>5个白馒头&4个红馒头，<br>
+                    4个红馒头&4个黑芝麻馒头。<br>请在最下方备注处说明。</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/7002.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">白馒头 (10个)</p>
+            <p class="symbol">$</p><p class="price">10.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0702')">-</button>
+                <input type="text" id="c0702" value="0">
+                <button class="plus-btn" onclick="plusAction('c0702')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>馒头可混搭，例如：<br>5个白馒头&4个红馒头，<br>
+                    4个红馒头&4个黑芝麻馒头。<br>请在最下方备注处说明。</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type8">
+        <div class="eachitem">
+            <img href="#" src="./pic/8000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">沸腾鱼</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0800')">-</button>
+                <input type="text" id="c0800" value="0">
+                <button class="plus-btn" onclick="plusAction('c0800')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/8001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">水煮鱼</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0801')">-</button>
+                <input type="text" id="c0801" value="0">
+                <button class="plus-btn" onclick="plusAction('c0801')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/8002.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">香辣蟹</p>
+            <p class="symbol">$</p><p class="price">68.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0802')">-</button>
+                <input type="text" id="c0802" value="0">
+                <button class="plus-btn" onclick="plusAction('c0802')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>含金针菇，午餐肉，薯条</h4>
+                <!-- 馒头可混搭，例如：5个白馒头&4个红馒头，4个红馒头&4个黑芝麻馒头。请在此处说明。 -->
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/8003.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">干锅手撕包菜</p>
+            <p class="symbol">$</p><p class="price">15.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0803')">-</button>
+                <input type="text" id="c0803" value="0">
+                <button class="plus-btn" onclick="plusAction('c0803')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items-first" id="type9">
+        <div class="eachitem">
+            <img href="#" src="./pic/9000.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">香辣猪手饭</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0900')">-</button>
+                <input type="text" id="c0900" value="0">
+                <button class="plus-btn" onclick="plusAction('c0900')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/9001.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">番茄牛肉饭</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0901')">-</button>
+                <input type="text" id="c0901" value="0">
+                <button class="plus-btn" onclick="plusAction('c0901')">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/9002.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">黑椒牛肉饭</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0902')">-</button>
+                <input type="text" id="c0902" value="0">
+                <button class="plus-btn" onclick="plusAction('c0902')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>包含水果蔬菜</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/9003.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">咖喱鸡扒饭</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0903')">-</button>
+                <input type="text" id="c0903" value="0">
+                <button class="plus-btn" onclick="plusAction('c0903')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>包含水果蔬菜</h4>
+            </div>
+        </div>
+    </div>
+    <div class="items">
+        <div class="eachitem">
+            <img href="#" src="./pic/9004.jpg">
+        </div>
+        <div class="eachitem">
+            <p class="itemname">日式照烧鸡腿饭</p>
+            <p class="symbol">$</p><p class="price">16.00</p>
+            <div class="counter">
+                <button class="minus-btn" onclick="minusAction('c0904')">-</button>
+                <input type="text" id="c0904" value="0">
+                <button class="plus-btn" onclick="plusAction('c0904')">+</button>
+            </div>
+            <div class="description">
+                <br><br>
+                <h4>包含水果蔬菜</h4>
+            </div>
+        </div>
+    </div>
+    <div class="confirm">
+        <input type="textfieid" class="request" 
+        placeholder="在此添加备注" 
+        value="">
+        <img id="btnAddToCart" src="./pic/addCartButton.jpg" onclick="calcTotal()">
+    </div>
+</body>

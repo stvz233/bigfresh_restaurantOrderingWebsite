@@ -1,0 +1,278 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.header {
+    height: 90px;
+    width: 100%;
+    margin: auto;
+    background-color: #f0c4de;
+    position: fixed;
+}
+
+.header .bigfreshlogo {
+    float: left;
+    padding-left: 10px;
+    height: 10%;
+}
+
+.header ul {
+    background-color: #f0c4de;
+}
+
+a {
+    text-decoration: none;
+}
+
+.nav {
+    float: right;
+    margin-right: 0px;
+    text-align: center;
+}
+
+.nav-ul li {
+    position: relative;
+    float: right;
+    width: 96px;
+    line-height: 90px;
+    text-align: center;
+}
+
+.nav ul li {
+    float: left;
+    height: 40px;
+}
+
+.nav .ordertypes {
+    position: absolute;
+    display: none;
+}
+
+.nav li:hover .ordertypes {
+    text-align: center;
+    padding-top: 0;
+    display: block;
+    cursor: pointer;
+}
+
+.nav .ordertypes li {
+    line-height: 40px;
+}
+
+
+/* .items {
+   background-image: url(./pic/background.jpg);
+   background-size: cover;
+   height: auto;
+   display: flex;
+   justify-content: space-between;
+}
+
+.items .eachitem {
+    width: 50%;
+    height: 50%;
+    padding-left: 80px;
+    padding-bottom: 40px;
+}
+
+.items .eachitem .food {
+    width: 100%;
+    height: 100%;
+}
+
+.items .eachitem .food p {
+    padding-left: 85px;
+    vertical-align:middle;
+}
+
+
+.items .eachitem img {
+    width: 50%;
+    height: 50%;
+    padding-top: 150px;
+    padding-left: 20px;
+}
+
+.items a:hover img {
+    filter:alpha(Opacity=80);
+} */
+
+
+.items {
+    background-image: url(./pic/background.jpg);
+    background-size: cover;
+    height: 33%;
+    display: flex;
+}
+
+.items-first {
+    background-image: url(./pic/background.jpg);
+    background-size: cover;
+    height: 33%;
+    display: flex;
+}
+
+.items .eachitem img {
+    width: 100%;
+    height: 100%;
+    padding-top: 38px;
+}
+
+.items .eachitem {
+    width: 33%;
+    height: 33%;
+    padding-top: 40px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.items-first .eachitem img {
+    width: 100%;
+    height: 100%;
+    padding-top: 60px;
+}
+
+.items-first .eachitem {
+    width: 33%;
+    height: 33%;
+    padding-top: 100px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.eachitem p:not(.price) {
+    font-size: x-large;
+    padding-left: 0px;
+    padding-top: 35px;
+    padding-right: 0px;
+}
+
+.eachitem .symbol, .price {
+    display: inline;
+    font-size: x-large;
+}
+
+.counter, .counter-small {
+    display: flex;
+    align-items: center;
+    padding-left: 0px;
+    padding-top: 35px;
+}
+
+.items-first .choices {
+    display: flex;
+}
+  
+.counter input {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+}
+
+h2 {
+    padding-right: 50px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.description h4 {
+    max-width: 300px;
+    margin-left:0px;
+    margin-top: -15px;
+    padding-top:0;
+}
+
+
+.counter-small input {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+}
+  
+.minus-btn, .plus-btn {
+    width: 40px;
+    height: 40px;
+    background: #f1f1f1;
+    border: none;
+    cursor: pointer;
+}
+  
+.minus-btn:hover, .plus-btn:hover {
+    background: #e1e1e1;
+}
+
+.confirm {
+    align-items: center;
+}
+
+.confirm img {
+    padding-left: 200px;
+
+    background-image: url(./pic/background.jpg);
+    background-size: cover;
+    transition: height 0.5s linear;
+    padding-bottom: 40px;
+    cursor: pointer;
+}
+
+.h3 {
+    margin-left: 145px;
+    padding-top: 30px;
+}
+
+.eachitem .checkall .check1 {
+    padding-left: 0px;
+    display: inline-block;
+}
+
+.confirm input {
+    margin-left: 25%;
+    margin-bottom: 35px;
+    width: 50%;
+    height: 70px;
+    text-align: left;
+    background-image: white;
+    background-size: cover;
+
+}
+
+.confirm {
+    background-image: url(./pic/background.jpg);
+    background-size: cover;
+    transition: height 0.5s linear;
+    display: flex;
+    align-items: center;
+}
+
+
+button #list {
+    width: 30px;
+    height: 30px;
+}
+
+
+.bill {
+    padding-top: 80px;
+    text-align: center;
+}
+
+.bill button {
+    width: 200px;
+    height: 100px;
+    margin-top: 400px;
+    padding-left: 250px;
+    text-align: center;
+}
+
+#btnAddToCart {
+    justify-content: center;
+}
+
+.request {
+    justify-content: center;
+}

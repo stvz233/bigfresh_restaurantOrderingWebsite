@@ -1,0 +1,14 @@
+{
+  "name": "bigfresh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "JQuery.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "author": "bigfresh",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.11.0"
+  }
+}
