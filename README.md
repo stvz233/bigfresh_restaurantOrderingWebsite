@@ -1,69 +1,41 @@
-# bigfresh_restaurantOrderingWebsite
+# 🍜 BigFresh Restaurant Ordering System
+> **An End-to-End Web MVP for a local Vancouver specialty restaurant.**
 
-## BigFresh Restaurant Ordering System 🍜
-A fully functional, end-to-end web application designed for BigFresh (温哥华手工凉皮店), a local Vancouver specialty restaurant. This project handles the entire customer journey from menu browsing to personalized order customization and final billing.
+---
 
-🚀 Project Overview
-This MVP (Minimum Viable Product) streamlines the digital ordering process. It features a dynamic menu interface, complex form handling for food customization (e.g., "no cilantro"), and a robust calculation logic for order summaries.
+## 🚀 Project Overview
+This project is a fully functional, digital ordering platform designed for **BigFresh (温哥华手工凉皮店)**. It streamlines the customer journey from menu browsing to personalized order customization and automated billing.
 
-🛠 Tech Stack
-Frontend: HTML5, CSS3 (Flexbox Layout), JavaScript (DOM Manipulation & Form Validation)
 
-Backend: PHP (Order processing and server-side logic)
 
-Database: MySQL (Relational schema for menu items and order history)
+---
 
-Version Control: Git
+## 🛠 Tech Stack
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | HTML5, CSS3 (Flexbox), JavaScript (DOM) |
+| **Backend** | PHP (Order Processing) |
+| **Database** | MySQL (Relational Schema) |
+| **Dev Tools** | VS Code, Git, Chrome DevTools |
 
-Development Tools: VS Code, Chrome DevTools, Local PHP Environment (XAMPP/MAMP)
+---
 
-✨ Core Features
-Interactive Navigation: A multi-tiered dropdown menu allowing users to jump directly to categories (Liangpi, Roujiamo, Braised Seafood, etc.).
+## ✨ Core Features
+* **🎯 Dynamic Navigation:** Multi-tiered dropdown menu for quick category jumps (Liangpi, Roujiamo, etc.).
+* **⚙️ Smart Customization:** * Quantity increment/decrement logic.
+    * Dietary preferences via Radio buttons.
+* **📝 Special Requests:** Real-time text area for custom notes (e.g. Extra Spicy).
+* **💰 Automated Checkout:** Instant calculation of unit prices and **Grand Total (CA$)**.
 
-Dynamic Product Selection: * Quantity increment/decrement logic.
+---
 
-Radio-button options for personalized dietary preferences (e.g., No Cilantro, No Green Pepper).
-
-Order Customization: Real-time text area for special requests (e.g., "Extra Spicy," "Add Green Onion").
-
-Automated Checkout: A summary page that parses selected items, applies unit pricing, and calculates the Grand Total (CA$) automatically.
-
-📂 Project Structure
-Plaintext
+## 📂 Project Structure
+```text
 .
-├── homepage.html           # Main landing page
-├── homestyle.css           # Global stylesheets (Navigation, Layout, Buttons)
+├── homepage.html           # Landing page
+├── homestyle.css           # Global styles
 ├── menu/
-│   ├── allcontent.html     # Core ordering interface (Category-based)
-│   └── orderlist.html      # Final order summary & total calculation
-├── database.sql            # Database schema for menu & orders
-├── submitorder.php         # Server-side logic for order submission
-└── logo.png                # Branding assets
-🛠 Installation & Setup
-Clone the Repository:
-
-Bash
-git clone https://github.com/yourusername/BigFresh-Ordering-System.git
-Database Configuration:
-
-Import database.sql into your local MySQL server.
-
-Ensure your database credentials match in submitorder.php.
-
-Local Server:
-
-Run via VS Code Live Server (for frontend UI testing).
-
-Run via PHP Local Server (for full-stack functionality):
-
-Bash
-php -S localhost:8000
-Access: Open http://localhost:8000/homepage.html in your browser.
-
-📈 Future Enhancements
-Mobile Responsiveness: Implement Media Queries for a seamless mobile ordering experience.
-
-Payment Gateway Integration: Connect to Stripe or PayPal API for real-time transactions.
-
-Admin Dashboard: Create a backend UI for restaurant staff to manage incoming orders in real-time.
-
+│   ├── allcontent.html     # Core ordering UI
+│   └── orderlist.html      # Final billing summary
+├── database.sql            # MySQL schema
+└── submitorder.php         # Server-side logic

@@ -1,0 +1,16 @@
+# 1. Security & Privacy
+cookies.txt 
+hts-log.txt
+.DS_Store        
+
+# 2. Dependencies
+node_modules/
+package-lock.json
+
+# 3. IDE Configurations
+.vscode/
+bigfresh_code.code-workspace
+
+# 4. Temporary Files
+*.log
+tmp/
