@@ -1,4 +1,4 @@
-# 🍜 BigFresh Restaurant Ordering System
+# 🍜 BigFresh Restaurant Ordering System (2023 Spring)
 > **An End-to-End Web MVP for a local Vancouver specialty restaurant.**
 
 ---
